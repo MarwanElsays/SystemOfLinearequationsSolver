@@ -1,0 +1,203 @@
+package Gui;
+
+import Fucntions.GaussElimination;
+import Fucntions.GaussJordan;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.FlowLayout;
+import javax.swing.ScrollPaneConstants;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.Vector;
+import java.util.jar.JarEntry;
+
+public class MainFrame extends JFrame implements ActionListener {
+
+    JComboBox<String> methodComboBox;
+    JTextArea EquationsArea;
+    JScrollPane EqautionsPane;
+    JButton calcButton;
+    JPanel containerPanel,methodPanel,precisionPanel,timePanel;
+    
+    MainFrame(){
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("Eliminations");
+        this.setSize(700, 700);
+        this.setLayout(null);
+        this.setLocationRelativeTo(null);
+
+        containerPanel = new JPanel();
+        containerPanel.setBounds(10, 10, 680, 100);
+        containerPanel.setBackground(new Color(0xF5F5DC));
+        containerPanel.setLayout(new FlowLayout());
+
+        String Methods[] = {"Gauss","jordan"};
+        methodComboBox = new JComboBox<String>(Methods);
+        methodComboBox.setPreferredSize(new Dimension(100,30));;
+        methodComboBox.addActionListener(this);
+
+        JLabel choosemethodLabel = new JLabel();
+        choosemethodLabel.setText("Choose Method");
+        choosemethodLabel.setForeground(Color.BLUE);
+        choosemethodLabel.setBackground(Color.white);
+        choosemethodLabel.setOpaque(true);
+        methodPanel = new JPanel();
+        methodPanel.setPreferredSize(new Dimension(200,80));
+        methodPanel.setBackground(new Color(0x00FF00));
+        methodPanel.add(choosemethodLabel);
+        methodPanel.add(methodComboBox);
+        methodPanel.setLayout(new FlowLayout());
+        
+
+        precisionPanel = new JPanel();
+        precisionPanel.setPreferredSize(new Dimension(200,80));
+        precisionPanel.setBackground(new Color(0xFF0000));
+        precisionPanel.setLayout(new FlowLayout());
+
+
+        timePanel = new JPanel();
+        timePanel.setPreferredSize(new Dimension(200,80));
+        timePanel.setBackground(new Color(0x0000FF));
+        timePanel.setLayout(new FlowLayout());
+
+        containerPanel.add(methodPanel);
+        containerPanel.add(precisionPanel);
+        containerPanel.add(timePanel);
+
+
+
+
+        EquationsArea = new JTextArea();
+        EquationsArea.setLineWrap(true);
+        EquationsArea.setWrapStyleWord(true);
+        EquationsArea.setFont(new Font("Arial",Font.PLAIN,16));
+        EquationsArea.setBackground(new Color(0x123456));
+        EquationsArea.setForeground(Color.white);
+        
+        EqautionsPane = new JScrollPane(EquationsArea);
+        EqautionsPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        EqautionsPane.setBounds(300, 250, 360, 350);
+
+        JPanel InputFormatPanel = new JPanel();
+        InputFormatPanel.setBounds(30, 350, 250, 250);
+        InputFormatPanel.setBackground(new Color(0xF5F5DC));
+
+        JLabel inFormatLabel = new JLabel();
+        inFormatLabel.setText("Equations must be in this form");
+        inFormatLabel.setFont(new Font("MV Boli",Font.BOLD,15));
+        inFormatLabel.setForeground(Color.BLUE);
+        inFormatLabel.setBackground(Color.white);
+        inFormatLabel.setOpaque(true);
+        InputFormatPanel.add(inFormatLabel);
+
+        JLabel directinglabel = new JLabel();
+        directinglabel.setText("Input the Equations:");
+        directinglabel.setHorizontalAlignment(JLabel.CENTER);
+        directinglabel.setFont(new Font("MV Boli",Font.BOLD,20));
+        directinglabel.setForeground(Color.red);
+        directinglabel.setBackground(Color.white);
+        directinglabel.setOpaque(true);
+        directinglabel.setBounds(30, 250, 250, 80);
+
+        calcButton = new JButton();
+        calcButton.setText("Calculate");
+        calcButton.setFont(new Font("MV Boli",Font.BOLD,15));
+        calcButton.setBackground(Color.ORANGE);
+        calcButton.setFocusable(false);
+        calcButton.setBounds(300, 600, 150, 50);
+        calcButton.addActionListener(this);
+
+        this.add(containerPanel);
+        this.add(directinglabel);
+        this.add(InputFormatPanel);
+        this.add(EqautionsPane);
+        this.add(calcButton);
+        this.setVisible(true);
+
+    }
+
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        String method = "Gauss";
+        if(e.getSource() == calcButton){
+            //System.out.println(EquationsArea.getText());
+            //System.out.println(equation);
+            double[][] systemOfCofficients;
+            for (String equation : EquationsArea.getText().split("\\n")){
+                //System.out.println(equation);
+                //System.out.print("Coffiecnts: ");     
+                cofficientsExtractor(equation);
+                //System.out.println("");
+            }
+
+            switch(method){
+                case "Gauss": 
+                    GaussElimination g = new GaussElimination(null, null, ABORT);
+                    System.out.println(g.getResult()); 
+                    break;
+                case "Jordan":
+                    GaussJordan gj = new GaussJordan(null, null, ABORT);
+                    System.out.println(gj.getResult()); 
+                    break;
+            }
+                
+              //cofficientsExtractor(equation);
+        }
+
+        if(e.getSource() == methodComboBox){
+            method = methodComboBox.getSelectedItem().toString();
+            // 
+            // System.out.println(g.getResult()); 
+        }
+        
+    }    
+
+
+    public Vector<Double> cofficientsExtractor (String equation){
+        Vector<Double> CofficentsAndB = new Vector<Double>();
+        Vector<String> subEquations = new Vector<String>();
+        String subEquation = "";
+
+        int i=0;
+        while(equation.charAt(i) != '=')
+        {
+            if((equation.charAt(i) == '-' || equation.charAt(i) == '+') && i!=0 ){
+                subEquations.add(subEquation);
+                subEquation = "";
+            }
+
+            if(equation.charAt(i) != '+')subEquation+=equation.charAt(i);
+            i++;
+        }
+
+        subEquations.add(subEquation);
+        double b = Double.parseDouble(equation.substring(i+1, equation.length()));
+
+        for(String eq : subEquations){
+            double coff =  0;
+            String subeq = eq.substring(0,eq.indexOf('x'));
+
+            if(subeq.equals(""))coff = 1;
+            else if(subeq.equals("-"))coff = -1;
+            else coff = Double.parseDouble(eq.substring(0,eq.indexOf('x')));
+            
+            CofficentsAndB.add(coff);             
+        }
+        CofficentsAndB.add(b);  
+        //System.out.println(Cofficents);
+
+        return CofficentsAndB;
+    }
+}
