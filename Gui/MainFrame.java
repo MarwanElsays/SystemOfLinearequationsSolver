@@ -73,8 +73,6 @@ public class MainFrame extends JFrame implements ActionListener {
         containerPanel.add(timePanel);
 
 
-
-
         EquationsArea = new JTextArea();
         EquationsArea.setLineWrap(true);
         EquationsArea.setWrapStyleWord(true);
@@ -145,11 +143,16 @@ public class MainFrame extends JFrame implements ActionListener {
                 case "Gauss": 
                     GaussElimination g = new GaussElimination(A, B, 5);
                     System.out.println(Arrays.toString(g.getResult())); 
-                    new OutputFrame();
+                    OutputFrame outputframe = new OutputFrame();
+                    outputframe.setResult(g.getResult());
+                    outputframe.setOutputAreaText();
                     break;
                 case "Jordan":
                     GaussJordan gj = new GaussJordan(A, B, 5);
                     System.out.println(Arrays.toString(gj.getResult())); 
+                    OutputFrame outputframe1 = new OutputFrame();
+                    outputframe1.setResult(gj.getResult());
+                    outputframe1.setOutputAreaText();
                     break;
             }
         }
