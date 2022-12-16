@@ -16,9 +16,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.Vector;
-import java.util.jar.JarEntry;
 
 public class MainFrame extends JFrame implements ActionListener {
 
@@ -132,41 +131,38 @@ public class MainFrame extends JFrame implements ActionListener {
         
         String method = "Gauss";
         if(e.getSource() == calcButton){
-            //System.out.println(EquationsArea.getText());
-            //System.out.println(equation);
-            double[][] systemOfCofficients;
-            for (String equation : EquationsArea.getText().split("\\n")){
-                //System.out.println(equation);
-                //System.out.print("Coffiecnts: ");     
-                cofficientsExtractor(equation);
-                //System.out.println("");
+            
+            String[] Equations = EquationsArea.getText().split("\\n");
+            double A[][] = new double[Equations.length][Equations.length];
+            double B[] = new double[Equations.length];
+            int i=0;
+            for (String equation : Equations){  
+                A[i] = cofficientsExtractor(equation,B,i);
+                i++;
             }
 
             switch(method){
                 case "Gauss": 
-                    GaussElimination g = new GaussElimination(null, null, ABORT);
-                    System.out.println(g.getResult()); 
+                    GaussElimination g = new GaussElimination(A, B, 5);
+                    System.out.println(Arrays.toString(g.getResult())); 
+                    new OutputFrame();
                     break;
                 case "Jordan":
-                    GaussJordan gj = new GaussJordan(null, null, ABORT);
-                    System.out.println(gj.getResult()); 
+                    GaussJordan gj = new GaussJordan(A, B, 5);
+                    System.out.println(Arrays.toString(gj.getResult())); 
                     break;
             }
-                
-              //cofficientsExtractor(equation);
         }
 
         if(e.getSource() == methodComboBox){
-            method = methodComboBox.getSelectedItem().toString();
-            // 
-            // System.out.println(g.getResult()); 
+            method = methodComboBox.getSelectedItem().toString(); 
         }
         
     }    
 
 
-    public Vector<Double> cofficientsExtractor (String equation){
-        Vector<Double> CofficentsAndB = new Vector<Double>();
+    public double[] cofficientsExtractor (String equation,double B[],int index){
+        Vector<Double> Cofficents = new Vector<Double>();
         Vector<String> subEquations = new Vector<String>();
         String subEquation = "";
 
@@ -184,6 +180,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         subEquations.add(subEquation);
         double b = Double.parseDouble(equation.substring(i+1, equation.length()));
+        B[index] = b;
 
         for(String eq : subEquations){
             double coff =  0;
@@ -193,11 +190,14 @@ public class MainFrame extends JFrame implements ActionListener {
             else if(subeq.equals("-"))coff = -1;
             else coff = Double.parseDouble(eq.substring(0,eq.indexOf('x')));
             
-            CofficentsAndB.add(coff);             
+            Cofficents.add(coff);             
         }
-        CofficentsAndB.add(b);  
-        //System.out.println(Cofficents);
 
-        return CofficentsAndB;
+        double[] x= new double[Cofficents.size()]; 
+        for(int j=0;j<Cofficents.size();j++){
+            x[j] = Cofficents.elementAt(j);
+        }
+
+        return x;
     }
 }
