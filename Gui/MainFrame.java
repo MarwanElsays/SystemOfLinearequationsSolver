@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 import java.awt.FlowLayout;
 import javax.swing.ScrollPaneConstants;
 import java.awt.Color;
@@ -17,15 +19,18 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.IntSummaryStatistics;
 import java.util.Vector;
 
 public class MainFrame extends JFrame implements ActionListener {
 
-    JComboBox<String> methodComboBox;
+    JComboBox<String> methodComboBox,LUComboBox;
     JTextArea EquationsArea;
-    JScrollPane EqautionsPane;
     JButton calcButton;
-    JPanel containerPanel,methodPanel,precisionPanel,timePanel;
+    JTextField presicionTxtField,TimeField,initialguessField,noOfIterationsField,absRelativeErrorField;
+    JPanel LUPanel,IterativePanel;
+    String method = "Gauss";
+    String LUmethod = "Downlittle Form";
     
     MainFrame(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,44 +38,178 @@ public class MainFrame extends JFrame implements ActionListener {
         this.setSize(700, 700);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(new Color(0x1177CC)); 
 
-        containerPanel = new JPanel();
-        containerPanel.setBounds(10, 10, 680, 100);
+        JPanel containerPanel = new JPanel();
+        containerPanel.setBounds(10, 10, 665, 100);
         containerPanel.setBackground(new Color(0xF5F5DC));
         containerPanel.setLayout(new FlowLayout());
 
-        String Methods[] = {"Gauss","jordan"};
+        String Methods[] = {"Gauss","jordan","LU Decomposition","Gauss-Seidel","Jacobi-Iteration"};
         methodComboBox = new JComboBox<String>(Methods);
-        methodComboBox.setPreferredSize(new Dimension(100,30));;
+        methodComboBox.setPreferredSize(new Dimension(110,30));;
         methodComboBox.addActionListener(this);
 
+        /*Choose Method */
         JLabel choosemethodLabel = new JLabel();
         choosemethodLabel.setText("Choose Method");
         choosemethodLabel.setForeground(Color.BLUE);
         choosemethodLabel.setBackground(Color.white);
         choosemethodLabel.setOpaque(true);
-        methodPanel = new JPanel();
-        methodPanel.setPreferredSize(new Dimension(200,80));
-        methodPanel.setBackground(new Color(0x00FF00));
+        JPanel methodPanel = new JPanel();
+        methodPanel.setPreferredSize(new Dimension(210,80));
+        methodPanel.setBackground(new Color(0x080D95));
         methodPanel.add(choosemethodLabel);
         methodPanel.add(methodComboBox);
         methodPanel.setLayout(new FlowLayout());
+
+       /*****************************************************/
         
+       /*Precision Part */
 
-        precisionPanel = new JPanel();
+        JLabel precisionLabel = new JLabel();
+        precisionLabel.setText("Precision");
+        precisionLabel.setForeground(Color.BLUE);
+        precisionLabel.setBackground(Color.white);
+        precisionLabel.setOpaque(true);
+        presicionTxtField = new JTextField();
+        presicionTxtField.setPreferredSize(new Dimension(100,40));
+		presicionTxtField.setFont(new Font("MV Boli",Font.PLAIN,20));
+		presicionTxtField.setForeground(new Color(0x00FF00));
+		presicionTxtField.setBackground(Color.white);
+		presicionTxtField.setCaretColor(Color.black);
+		presicionTxtField.setText("");
+        JPanel precisionPanel = new JPanel();
         precisionPanel.setPreferredSize(new Dimension(200,80));
-        precisionPanel.setBackground(new Color(0xFF0000));
+        precisionPanel.setBackground(new Color(0x080D95));
         precisionPanel.setLayout(new FlowLayout());
+        precisionPanel.add(precisionLabel);
+        precisionPanel.add(presicionTxtField);
 
+        /****************************************** */
 
-        timePanel = new JPanel();
+        /*time Part */
+
+        JLabel timeLabel = new JLabel();
+        timeLabel.setText("Time");
+        timeLabel.setForeground(Color.BLUE);
+        timeLabel.setBackground(Color.white);
+        timeLabel.setOpaque(true);
+        TimeField = new JTextField();
+        TimeField.setPreferredSize(new Dimension(100,40));
+		TimeField.setFont(new Font("MV Boli",Font.PLAIN,20));
+		TimeField.setForeground(new Color(0x00FF00));
+		TimeField.setBackground(Color.white);
+		TimeField.setCaretColor(Color.black);
+		TimeField.setText("");
+        TimeField.setEditable(false);
+        JPanel timePanel = new JPanel();
         timePanel.setPreferredSize(new Dimension(200,80));
-        timePanel.setBackground(new Color(0x0000FF));
+        timePanel.setBackground(new Color(0x080D95));
         timePanel.setLayout(new FlowLayout());
+        timePanel.add(timeLabel);
+        timePanel.add(TimeField);
+        /*************************************************** */
 
         containerPanel.add(methodPanel);
         containerPanel.add(precisionPanel);
         containerPanel.add(timePanel);
+
+
+        /*****Lu Panel*************** */
+        LUPanel = new JPanel();
+        LUPanel.setBounds(10, 120, 665, 100);
+        LUPanel.setBackground(new Color(0xF5F5DC));
+        LUPanel.setLayout(new FlowLayout());
+
+        String LUMethods[] = {"Downlittle Form","Crout Form", "Cholesky Form"};
+        LUComboBox = new JComboBox<String>(LUMethods);
+        LUComboBox.setPreferredSize(new Dimension(110,30));;
+        LUComboBox.addActionListener(this);
+        LUPanel.add(LUComboBox);
+        LUPanel.setVisible(false);
+
+
+
+        /**************Iterative panel*********************/
+        IterativePanel = new JPanel();
+        IterativePanel.setBounds(10, 120, 660, 100);
+        IterativePanel.setBackground(new Color(0xF5F5DC));
+        IterativePanel.setLayout(new FlowLayout());
+
+        JPanel initialguessPanel = new JPanel();
+        initialguessPanel.setPreferredSize(new Dimension(210,80));
+        initialguessPanel.setBackground(new Color(0x080D95));
+        initialguessPanel.setLayout(new FlowLayout());
+
+        JLabel initialguessLabel = new JLabel();
+        initialguessLabel.setText("initial Guess");
+        initialguessLabel.setForeground(Color.BLUE);
+        initialguessLabel.setBackground(Color.white);
+        initialguessLabel.setOpaque(true);
+        initialguessLabel.setPreferredSize(new Dimension(100,40));
+        initialguessField = new JTextField();
+        initialguessField.setPreferredSize(new Dimension(100,40));
+		initialguessField.setFont(new Font("MV Boli",Font.PLAIN,16));
+		initialguessField.setForeground(new Color(0x00FF00));
+		initialguessField.setBackground(Color.white);
+		initialguessField.setCaretColor(Color.black);
+		initialguessField.setText("");
+
+        initialguessPanel.add(initialguessLabel);
+        initialguessPanel.add(initialguessField);
+
+        JPanel noOfIterationsPanel = new JPanel();
+        noOfIterationsPanel.setPreferredSize(new Dimension(210,80));
+        noOfIterationsPanel.setBackground(new Color(0x080D95));
+        noOfIterationsPanel.setLayout(new FlowLayout());
+
+        JLabel noOfIterationsLabel = new JLabel();
+        noOfIterationsLabel.setText("No. Of Iterations");
+        noOfIterationsLabel.setForeground(Color.BLUE);
+        noOfIterationsLabel.setBackground(Color.white);
+        noOfIterationsLabel.setOpaque(true);
+        noOfIterationsLabel.setPreferredSize(new Dimension(100,40));
+        noOfIterationsField = new JTextField();
+        noOfIterationsField.setPreferredSize(new Dimension(100,40));
+		noOfIterationsField.setFont(new Font("MV Boli",Font.PLAIN,16));
+		noOfIterationsField.setForeground(new Color(0x00FF00));
+		noOfIterationsField.setBackground(Color.white);
+		noOfIterationsField.setCaretColor(Color.black);
+		noOfIterationsField.setText("");
+
+        noOfIterationsPanel.add(noOfIterationsLabel);
+        noOfIterationsPanel.add(noOfIterationsField);
+
+        
+        JPanel absRelativeErrorPanel = new JPanel();
+        absRelativeErrorPanel.setPreferredSize(new Dimension(210,80));
+        absRelativeErrorPanel.setBackground(new Color(0x080D95));
+        absRelativeErrorPanel.setLayout(new FlowLayout());
+
+        JLabel absRelativeErrorLabel = new JLabel();
+        absRelativeErrorLabel.setText("Relative Error");
+        absRelativeErrorLabel.setForeground(Color.BLUE);
+        absRelativeErrorLabel.setBackground(Color.white);
+        absRelativeErrorLabel.setOpaque(true);
+        absRelativeErrorLabel.setPreferredSize(new Dimension(100,40));
+        absRelativeErrorField = new JTextField();
+        absRelativeErrorField.setPreferredSize(new Dimension(100,40));
+		absRelativeErrorField.setFont(new Font("MV Boli",Font.PLAIN,16));
+		absRelativeErrorField.setForeground(new Color(0x00FF00));
+		absRelativeErrorField.setBackground(Color.white);
+		absRelativeErrorField.setCaretColor(Color.black);
+		absRelativeErrorField.setText("");
+
+        absRelativeErrorPanel.add(absRelativeErrorLabel);
+        absRelativeErrorPanel.add(absRelativeErrorField);
+
+        IterativePanel.add(initialguessPanel);
+        IterativePanel.add(noOfIterationsPanel);
+        IterativePanel.add(absRelativeErrorPanel);
+        IterativePanel.setVisible(false);
+
+        /************************************************************/
 
 
         EquationsArea = new JTextArea();
@@ -80,7 +219,7 @@ public class MainFrame extends JFrame implements ActionListener {
         EquationsArea.setBackground(new Color(0x123456));
         EquationsArea.setForeground(Color.white);
         
-        EqautionsPane = new JScrollPane(EquationsArea);
+        JScrollPane EqautionsPane = new JScrollPane(EquationsArea);
         EqautionsPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         EqautionsPane.setBounds(300, 250, 360, 350);
 
@@ -113,6 +252,8 @@ public class MainFrame extends JFrame implements ActionListener {
         calcButton.setBounds(300, 600, 150, 50);
         calcButton.addActionListener(this);
 
+        this.add(IterativePanel);
+        this.add(LUPanel);
         this.add(containerPanel);
         this.add(directinglabel);
         this.add(InputFormatPanel);
@@ -122,12 +263,9 @@ public class MainFrame extends JFrame implements ActionListener {
 
     }
 
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        String method = "Gauss";
+                
         if(e.getSource() == calcButton){
             
             String[] Equations = EquationsArea.getText().split("\\n");
@@ -139,26 +277,71 @@ public class MainFrame extends JFrame implements ActionListener {
                 i++;
             }
 
+            double[] intialguess = new double[Equations.length] ;
+            int noOfIterations;
+            double AbsRealtiveError;
+            if(method.equals("Gauss-Seidel") || method.equals("Jacobi-Iteration")){
+                String[] intialGuessesArray = initialguessField.getText().split(",");
+                for(int k=0;k<intialGuessesArray.length;k++){
+                    intialguess[k] = Double.parseDouble(intialGuessesArray[k]);
+                }
+                noOfIterations = Integer.parseInt(noOfIterationsField.getText());
+                AbsRealtiveError = Double.parseDouble(absRelativeErrorField.getText());
+            }
+
             switch(method){
                 case "Gauss": 
-                    GaussElimination g = new GaussElimination(A, B, 5);
+                    GaussElimination g = new GaussElimination(A, B,Integer.parseInt(presicionTxtField.getText()));
                     System.out.println(Arrays.toString(g.getResult())); 
                     OutputFrame outputframe = new OutputFrame();
                     outputframe.setResult(g.getResult());
                     outputframe.setOutputAreaText();
+                    TimeField.setText(String.valueOf(g.getTime()));
                     break;
                 case "Jordan":
-                    GaussJordan gj = new GaussJordan(A, B, 5);
+                    GaussJordan gj = new GaussJordan(A, B, Integer.parseInt(presicionTxtField.getText()));
                     System.out.println(Arrays.toString(gj.getResult())); 
                     OutputFrame outputframe1 = new OutputFrame();
                     outputframe1.setResult(gj.getResult());
                     outputframe1.setOutputAreaText();
+                    TimeField.setText(String.valueOf(gj.getTime()));
                     break;
+                case "LU Decomposition":
+                    switch(LUmethod){
+                        case "Downlittle Form":
+                            OutputFrame outputframe2 = new OutputFrame();
+                            break;
+
+                        case "Crout Form":
+                            OutputFrame outputframe3 = new OutputFrame();
+                            break;
+
+                        case "Cholesky Form":
+                            OutputFrame outputframe4 = new OutputFrame();
+                            break;
+                    }
+                    break;
+                case "Gauss-Seidel":
+                    OutputFrame outputframe5 = new OutputFrame();
+                    break;
+                case "Jacobi-Iteration":
+                    OutputFrame outputframe6 = new OutputFrame();
+                    break;   
             }
         }
 
         if(e.getSource() == methodComboBox){
             method = methodComboBox.getSelectedItem().toString(); 
+        
+            if(method.equals("LU Decomposition"))LUPanel.setVisible(true);
+            else LUPanel.setVisible(false);
+
+            if(method.equals("Gauss-Seidel") || method.equals("Jacobi-Iteration"))IterativePanel.setVisible(true);
+            else IterativePanel.setVisible(false);
+        }
+
+        if(e.getSource() == LUComboBox){
+            LUmethod = LUComboBox.getSelectedItem().toString();
         }
         
     }    
