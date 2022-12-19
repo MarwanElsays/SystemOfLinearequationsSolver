@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +23,6 @@ public class MainFrame extends JFrame {
         this.setTitle("Eliminations");
         this.setSize(700, 700);
         this.setLayout(null);
-        this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new Color(0xDDDDDD));
 
         Panel containerPanel = new Panel(10, 10, 665, 100, true);
