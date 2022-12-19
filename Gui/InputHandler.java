@@ -33,9 +33,9 @@ public class InputHandler {
     public void solve() {
         extractCoefficients();
         if (frame.getMethod().equals("Gauss") || frame.getMethod().equals("Gauss-Jordan"))
-            solveIterative();
-        else if (frame.getMethod().equals("Jacobi") || frame.getMethod().equals("Gauss-Seidel"))
             solveNonIterative();
+        else if (frame.getMethod().equals("Jacobi") || frame.getMethod().equals("Gauss-Seidel"))
+            solveIterative();
         else if (frame.getMethod().equals("LU Decomposition"))
             solveLU();
     }
@@ -122,16 +122,14 @@ public class InputHandler {
     }
     
     private void solveIterative() {
-        int noOfIterations;
-        double AbsRelativeError;
+        int noOfIterations = frame.getNoOfIterations();
+        double AbsRelativeError = frame.getAbsRelativeErrorField();
         double[] intialGuess = new double[noOfEquations];
     
         String[] intialGuessesArray = frame.getInitialGuess();
         for (int k = 0; k < intialGuessesArray.length; k++) {
             intialGuess[k] = Double.parseDouble(intialGuessesArray[k]);
         }
-        noOfIterations = frame.getNoOfIterations();
-        AbsRelativeError = frame.getAbsRelativeErrorField();
     
         switch (frame.getMethod()) {
             case "Gauss-Seidel": {
