@@ -52,7 +52,7 @@ public class MainFrame extends JFrame {
         timePanel.getPanel().add(TimeField.getField());
 
         Component[] c1 = {methodPanel.getPanel(), precisionPanel.getPanel(), timePanel.getPanel()};
-        containerPanel.ADDComponents(c1);
+        containerPanel.AddComponents(c1);
 
         /***** Lu Panel*************** */
         LUPanel = new Panel(10, 110, 765, 100, false);
