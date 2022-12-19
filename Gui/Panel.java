@@ -1,7 +1,6 @@
 package Gui;
 
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import java.awt.Component;
