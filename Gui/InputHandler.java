@@ -5,6 +5,8 @@ import java.util.Vector;
 
 import Functions.GaussElimination;
 import Functions.GaussJordan;
+import Functions.GaussSeidalSolver;
+import Functions.JacobiSolver;
 
 public class InputHandler {
 
@@ -34,7 +36,7 @@ public class InputHandler {
         extractCoefficients();
         if (frame.getMethod().equals("Gauss") || frame.getMethod().equals("Gauss-Jordan"))
             solveNonIterative();
-        else if (frame.getMethod().equals("Jacobi") || frame.getMethod().equals("Gauss-Seidel"))
+        else if (frame.getMethod().equals("Jacobi-Iteration") || frame.getMethod().equals("Gauss-Seidel"))
             solveIterative();
         else if (frame.getMethod().equals("LU Decomposition"))
             solveLU();
@@ -113,7 +115,6 @@ public class InputHandler {
             case "Gauss-Jordan": {
                 OutputFrame outputframe = new OutputFrame();
                 GaussJordan gj = new GaussJordan(A, B, precision);
-                System.out.println(Arrays.toString(gj.getResult()));
                 outputframe.setOutput(gj.getResult());
                 frame.setTime(String.valueOf(gj.getTime()));
                 break;
@@ -134,10 +135,15 @@ public class InputHandler {
         switch (frame.getMethod()) {
             case "Gauss-Seidel": {
                 OutputFrame outputframe = new OutputFrame();
+                GaussSeidalSolver gauss_seidel = new GaussSeidalSolver(outputframe);
+                //gauss_seidel.solve(A, B, intialGuess, AbsRelativeError);
+                outputframe.setOutput(gauss_seidel.solve(A, B, intialGuess, noOfIterations));
                 break;
             }
             case "Jacobi-Iteration": {
                 OutputFrame outputframe = new OutputFrame();
+                JacobiSolver jacobi = new JacobiSolver();
+                outputframe.setOutput(jacobi.solve(A, B, intialGuess, noOfIterations));
                 break;
             }
         }

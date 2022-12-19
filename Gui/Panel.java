@@ -1,6 +1,7 @@
 package Gui;
 
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import java.awt.Component;
@@ -9,6 +10,7 @@ import java.awt.Dimension;
 public class Panel{
 
     private JPanel panel;
+    Panel[][] subPanels;
 
     Panel(int x, int y, int w, int h, boolean visible) {
         panel = new JPanel();
@@ -31,9 +33,8 @@ public class Panel{
         panel.setLayout(null);
     }
 
-    public void ADDComponents(Component[] components) {
+    public void AddComponents(Component[] components) {
         for (Component component : components) {
-            System.out.println(component);
             panel.add(component);
         }
     }

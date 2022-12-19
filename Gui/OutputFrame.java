@@ -43,4 +43,9 @@ public class OutputFrame extends JFrame {
         OutputArea.setText(output);
         OutputArea.setEditable(false);
     }
+
+    public void printSteps(String s) {
+        OutputArea.setText(s);
+        OutputArea.setEditable(false);
+    }
 }

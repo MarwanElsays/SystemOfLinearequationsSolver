@@ -10,10 +10,8 @@ public class Label{
 
     Label(String text) {
         label = new JLabel(text);
-        label.setForeground(Color.BLUE);
-        label.setBackground(new Color(0xDDDDDD));
-        label.setFont(new Font("Calibri", Font.PLAIN, 20));
-        label.setOpaque(true);
+        label.setForeground(Color.black);
+        label.setFont(new Font("Cascadia Mono", Font.PLAIN, 18));
     }
 
     Label(String text,int x,int y,int w,int h){
