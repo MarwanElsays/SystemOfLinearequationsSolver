@@ -2,23 +2,12 @@ package Gui;
 
 import java.awt.Color;
 import java.awt.Font;
-
 import javax.swing.JButton;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Button {
 
     JButton button;
-    
-    ActionListener buttonAction = new ActionListener() {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            
-        }
-
-    };
 
     Button(int x, int y, int w, int h) {
         button = new JButton("Calculate");
@@ -32,4 +21,7 @@ public class Button {
         return button;
     }
 
+    public void addActionListener(ActionListener listener) {
+        button.addActionListener(listener);
+    }
 }

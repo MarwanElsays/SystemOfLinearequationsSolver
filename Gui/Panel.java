@@ -33,6 +33,10 @@ public class Panel {
         }
     }
 
+    public void setVisible(boolean visible) {
+        panel.setVisible(visible);
+    }
+
     public JPanel getPanel() {
         return panel;
     }
