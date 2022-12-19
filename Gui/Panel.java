@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import java.awt.Component;
 import java.awt.Dimension;
 
-public class Panel {
+public class Panel{
 
     private JPanel panel;
 
@@ -27,8 +27,13 @@ public class Panel {
         panel.setAlignmentY(JPanel.CENTER_ALIGNMENT);
     }
 
-    void addComponents(Component[] components) {
+    public void setlayoutNull(){
+        panel.setLayout(null);
+    }
+
+    public void ADDComponents(Component[] components) {
         for (Component component : components) {
+            System.out.println(component);
             panel.add(component);
         }
     }

@@ -12,7 +12,7 @@ public class Button {
     Button(int x, int y, int w, int h) {
         button = new JButton("Calculate");
         button.setFont(new Font("MV Boli", Font.BOLD, 15));
-        button.setBackground(Color.white);
+        button.setBackground(Color.ORANGE);
         button.setFocusable(false);
         button.setBounds(x, y, w, h);
     }
