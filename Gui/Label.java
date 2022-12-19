@@ -11,13 +11,13 @@ public class Label{
     Label(String text) {
         label = new JLabel(text);
         label.setForeground(Color.black);
-        label.setFont(new Font("Cascadia Mono", Font.PLAIN, 18));
+        label.setFont(new Font("Cascadia Mono", Font.PLAIN, 20));
     }
 
     Label(String text,int x,int y,int w,int h){
         label = new JLabel(text);
         label.setForeground(Color.black);
-        label.setFont(new Font("Cascadia Mono", Font.PLAIN, 18));
+        label.setFont(new Font("Cascadia Mono", Font.PLAIN, 20));
         label.setBounds(x, y, w, h);
     }
     

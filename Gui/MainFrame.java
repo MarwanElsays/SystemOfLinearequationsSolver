@@ -1,13 +1,15 @@
 package Gui;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-
+import java.awt.event.MouseListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.Component;
 
 public class MainFrame extends JFrame {
@@ -25,6 +27,7 @@ public class MainFrame extends JFrame {
         this.setSize(800, 700);
         this.setLayout(null);
         this.getContentPane().setBackground(new Color(0xDDDDDD));
+        this.setLocationRelativeTo(null);
 
         Panel containerPanel = new Panel(10, 15, 765, 70, true);
 
@@ -103,12 +106,6 @@ public class MainFrame extends JFrame {
 
         Panel InputFormatPanel = new Panel(30, 350, 250, 250, true);
 
-        Label inFormatLabel = new Label("Equations must be in this form");
-        TextArea inputForm = new TextArea("a11x1+a12x2+...+a1nxn=b1\na21x1+a22x2+...+a2nxn=b2\n.\n.\n.\n.\nan1x1+an2x2+...+annxn=bn");
-        
-        InputFormatPanel.getPanel().add(inFormatLabel.getLabel());
-        InputFormatPanel.getPanel().add(inputForm.getArea());
-
         Label directinglabel = new Label("Input the Equations:");
         directinglabel.getLabel().setHorizontalAlignment(JLabel.CENTER);
         directinglabel.getLabel().setBounds(30, 250, 250, 80);
@@ -116,6 +113,7 @@ public class MainFrame extends JFrame {
 
         calcButton = new Button(350, 600, 150, 50);
         calcButton.addActionListener(buttonListener);
+        calcButton.addMouseListener(buttonMouseListener);
         // calcButton.addActionListener(this);/////////////////////////////////////////////////////////////////////////////
 
         this.add(IterativePanel.getPanel());
@@ -168,6 +166,10 @@ public class MainFrame extends JFrame {
         return IterativePanel;
     }
 
+    public JButton getButton() {
+        return calcButton.getButton();
+    }
+
     ActionListener buttonListener = new ActionListener() {
 
         @Override
@@ -182,5 +184,31 @@ public class MainFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             new InputHandler(frame).setMethod();
         }
+    };
+
+    MouseListener buttonMouseListener = new MouseListener(){
+
+        @Override
+        public void mouseClicked(MouseEvent e) { 
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) { 
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            new InputHandler(frame).ChangeColor(new Color(0xFF8C00));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            new InputHandler(frame).ChangeColor(Color.ORANGE);
+        }
+
     };
 }

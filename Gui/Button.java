@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-
+import java.awt.event.MouseListener;
 public class Button {
 
     JButton button;
@@ -23,5 +23,9 @@ public class Button {
 
     public void addActionListener(ActionListener listener) {
         button.addActionListener(listener);
+    }
+
+    public void addMouseListener(MouseListener listener) {
+        button.addMouseListener(listener);
     }
 }

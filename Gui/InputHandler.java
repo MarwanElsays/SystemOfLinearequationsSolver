@@ -1,8 +1,10 @@
 package Gui;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Vector;
-
+import java.awt.Color;
 import Functions.GaussElimination;
 import Functions.GaussJordan;
 import Functions.GaussSeidalSolver;
@@ -17,6 +19,10 @@ public class InputHandler {
 
     InputHandler(MainFrame frame) {
         this.frame = frame;
+    }
+
+    public void ChangeColor(Color c){
+        frame.getButton().setBackground(c);
     }
 
     public void setMethod() {
@@ -46,8 +52,79 @@ public class InputHandler {
         return noOfEquations;
     }
 
-    private double[] cofficientsExtractor(String equation, int index) {
-        Vector<Double> Coefficients = new Vector<Double>();
+    private double[] cofficientsExtractor(String equation, int index,HashSet<Character> var) {
+        equation = equation.replaceAll(" ", "");
+        double [] Coefficients = new double[noOfEquations];
+        for(int i=0;i<noOfEquations;i++){
+            Coefficients[i] = 0;
+        }        
+        
+        String [] subEquations = splitEquations(equation,index);
+    
+        for (String eq : subEquations) {
+            double coeff = 0;
+            int j=0;
+            int indexofvar = 0;
+
+            for(j=eq.length()-1;j>=0;j--){
+                if(Character.isAlphabetic(eq.charAt(j))){
+                    Iterator <Character> it = var.iterator();
+ 
+                    while(it.hasNext()){
+                        if(it.next().equals(eq.charAt(j))){
+                            break;
+                        }
+                        indexofvar++;
+                    }
+                    break;
+                }
+            }
+
+            String subeq = eq.substring(0, j);
+            if(var.size() == 1){
+                indexofvar = Integer.parseInt(eq.substring(j+1))-1;
+            }
+    
+            if (subeq.equals(""))
+                coeff = 1;
+            else if (subeq.equals("-"))
+                coeff = -1;
+            else
+                coeff = Double.parseDouble(eq.substring(0, j));
+    
+            Coefficients[indexofvar] = coeff;
+        }
+    
+        return Coefficients;
+    }
+    
+    private void extractCoefficients() {
+        String[] Equations = frame.getEquations();
+        HashSet<Character> Variables = extractVariables(Equations);
+        System.out.println(Variables);
+
+        noOfEquations = Equations.length;
+        A = new double[noOfEquations][noOfEquations];
+        B = new double[noOfEquations];
+        for (int i = 0; i < noOfEquations; i++) {
+            A[i] = cofficientsExtractor(Equations[i], i,Variables);
+        }
+    }
+
+    private HashSet<Character> extractVariables(String [] equations){
+        HashSet<Character> variables = new HashSet<>();
+        for(int i=0;i<equations.length;i++){
+            for(int j=0;j<equations[i].length();j++){
+                if(Character.isAlphabetic(equations[i].charAt(j))){
+                    variables.add(equations[i].charAt(j));
+                }
+            }
+            if(variables.size() == noOfEquations) break;
+        }
+        return variables;
+    }
+
+    private String[] splitEquations(String equation,int index){        
         Vector<String> subEquations = new Vector<String>();
         String subEquation = "";
     
@@ -62,41 +139,17 @@ public class InputHandler {
                 subEquation += equation.charAt(i);
             i++;
         }
-    
+        
         subEquations.add(subEquation);
         double b = Double.parseDouble(equation.substring(i + 1, equation.length()));
         B[index] = b;
-    
-        for (String eq : subEquations) {
-            double coeff = 0;
-            String subeq = eq.substring(0, eq.indexOf('x'));
-    
-            if (subeq.equals(""))
-                coeff = 1;
-            else if (subeq.equals("-"))
-                coeff = -1;
-            else
-                coeff = Double.parseDouble(eq.substring(0, eq.indexOf('x')));
-    
-            Coefficients.add(coeff);
+
+        String[] x = new String[subEquations.size()];
+        for (int j = 0; j < subEquations.size(); j++) {
+            x[j] = subEquations.elementAt(j);
         }
-    
-        double[] x = new double[noOfEquations];
-        for (int j = 0; j < noOfEquations; j++) {
-            x[j] = Coefficients.elementAt(j);
-        }
-    
+
         return x;
-    }
-    
-    private void extractCoefficients() {
-        String[] Equations = frame.getEquations();
-        noOfEquations = Equations.length;
-        A = new double[noOfEquations][noOfEquations];
-        B = new double[noOfEquations];
-        for (int i = 0; i < noOfEquations; i++) {
-            A[i] = cofficientsExtractor(Equations[i], i);
-        }
     }
     
     private void solveNonIterative() {
