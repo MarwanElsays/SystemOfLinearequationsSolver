@@ -155,7 +155,12 @@ public class MainFrame extends JFrame {
     }
 
     public String[] getInitialGuess() {
-        String s = initialGuessField.getField().getText().equals("") ? "1,1,1" : initialGuessField.getField().getText();
+        String defaultGuess = "";
+        for (int i = 0; i < getEquations().length; i++) {
+            defaultGuess += "1,";
+        }
+        defaultGuess = defaultGuess.substring(0, getEquations().length - 1);
+        String s = initialGuessField.getField().getText().equals("") ? defaultGuess : initialGuessField.getField().getText();
         return s.split(",");
     }
 
