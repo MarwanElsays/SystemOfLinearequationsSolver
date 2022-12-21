@@ -9,6 +9,7 @@ import Functions.GaussElimination;
 import Functions.GaussJordan;
 import Functions.GaussSeidalSolver;
 import Functions.JacobiSolver;
+import Functions.LU;
 
 public class InputHandler {
 
@@ -16,6 +17,7 @@ public class InputHandler {
     private int noOfEquations;
     private double[][] A;
     private double[] B;
+    Vector<Character> vars = new Vector<>();
 
     InputHandler(MainFrame frame) {
         this.frame = frame;
@@ -40,12 +42,17 @@ public class InputHandler {
     
     public void solve() {
         extractCoefficients();
-        if (frame.getMethod().equals("Gauss") || frame.getMethod().equals("Gauss-Jordan"))
-            solveNonIterative();
-        else if (frame.getMethod().equals("Jacobi-Iteration") || frame.getMethod().equals("Gauss-Seidel"))
-            solveIterative();
-        else if (frame.getMethod().equals("LU Decomposition"))
-            solveLU();
+        if (vars.size() != noOfEquations && vars.size()!= 1) {
+            OutputFrame frame = new OutputFrame();
+            frame.setText("INVALID INPUT:\nNUMBER OF EQUATIONS MUST EQUAL NUMBER OF VARIABLES");
+        } else {
+            if (frame.getMethod().equals("Gauss") || frame.getMethod().equals("Gauss-Jordan"))
+                solveNonIterative();
+            else if (frame.getMethod().equals("Jacobi-Iteration") || frame.getMethod().equals("Gauss-Seidel"))
+                solveIterative();
+            else if (frame.getMethod().equals("LU Decomposition"))
+                solveLU();
+        }
     }
     
     public int getNoOfEquations() {
@@ -54,8 +61,8 @@ public class InputHandler {
 
     private double[] cofficientsExtractor(String equation, int index,HashSet<Character> var) {
         equation = equation.replaceAll(" ", "");
-        double [] Coefficients = new double[noOfEquations];
-        for(int i=0;i<noOfEquations;i++){
+        double [] Coefficients = new double[Math.max(vars.size(),noOfEquations)];
+        for(int i=0;i<Math.max(vars.size(),noOfEquations);i++){
             Coefficients[i] = 0;
         }        
         
@@ -101,7 +108,12 @@ public class InputHandler {
     private void extractCoefficients() {
         String[] Equations = frame.getEquations();
         HashSet<Character> Variables = extractVariables(Equations);
-        System.out.println(Variables);
+
+        Iterator<Character> it = Variables.iterator();
+        while(it.hasNext()){
+            this.vars.add(it.next());
+        }
+        //System.out.println(Variables);
 
         noOfEquations = Equations.length;
         A = new double[noOfEquations][noOfEquations];
@@ -158,17 +170,17 @@ public class InputHandler {
         switch (frame.getMethod()) {
             case "Gauss": {
                 OutputFrame outputframe = new OutputFrame();
-                GaussElimination gauss = new GaussElimination(A, B, precision);
-                System.out.println(Arrays.toString(gauss.getResult()));
-                outputframe.setOutput(gauss.getResult());
+                GaussElimination gauss = new GaussElimination(A, B, precision,outputframe,this.vars);
+                // System.out.println(Arrays.toString(gauss.getResult()));
+                //outputframe.setOutput(gauss.getResult());
                 frame.setTime(String.valueOf(gauss.getTime()));
                 break;
             }
     
             case "Gauss-Jordan": {
                 OutputFrame outputframe = new OutputFrame();
-                GaussJordan gj = new GaussJordan(A, B, precision);
-                outputframe.setOutput(gj.getResult());
+                GaussJordan gj = new GaussJordan(A, B, precision,outputframe,this.vars);
+                //outputframe.setOutput(gj.getResult());
                 frame.setTime(String.valueOf(gj.getTime()));
                 break;
             }
@@ -190,34 +202,27 @@ public class InputHandler {
                 OutputFrame outputframe = new OutputFrame();
                 GaussSeidalSolver gauss_seidel = new GaussSeidalSolver(outputframe);
                 //gauss_seidel.solve(A, B, intialGuess, AbsRelativeError);
-                outputframe.setOutput(gauss_seidel.solve(A, B, intialGuess, noOfIterations));
+                long startTime = System.nanoTime();
+                outputframe.setOutput(gauss_seidel.solve(A, B, intialGuess, noOfIterations,AbsRelativeError));
+                long time = System.nanoTime() - startTime;
+                frame.setTime(String.valueOf(time));
                 break;
             }
             case "Jacobi-Iteration": {
                 OutputFrame outputframe = new OutputFrame();
-                JacobiSolver jacobi = new JacobiSolver();
-                outputframe.setOutput(jacobi.solve(A, B, intialGuess, noOfIterations));
+                JacobiSolver jacobi = new JacobiSolver(outputframe);
+                long startTime = System.nanoTime();
+                outputframe.setOutput(jacobi.solve(A, B, intialGuess, noOfIterations,AbsRelativeError));
+                long time = System.nanoTime() - startTime;
+                frame.setTime(String.valueOf(time));
                 break;
             }
         }
     }
 
     private void solveLU() {
-        switch (frame.getLUForm()) {
-            case "Downlittle Form": {
-                OutputFrame outputframe = new OutputFrame();
-                break;
-            }
-
-            case "Crout Form": {
-                OutputFrame outputframe = new OutputFrame();
-                break;
-            }
-
-            case "Cholesky Form": {
-                OutputFrame outputframe = new OutputFrame();
-                break;
-            }
-        }
+        OutputFrame outputframe = new OutputFrame();
+        int precision = frame.getPrecision();
+        LU lu = new LU(A,B,precision,frame.getLUForm(),outputframe,this.vars);
     }
 }

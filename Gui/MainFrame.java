@@ -62,7 +62,7 @@ public class MainFrame extends JFrame {
         LUPanel.setlayoutNull();
         String LUForms[] = { "Downlittle Form", "Crout Form", "Cholesky Form" };
         Label LULabel = new Label("Choose Form: ",20,35,160,40);
-        ComboBox LUComboBox = new ComboBox(LUForms,250,35,160,40);
+        LUComboBox = new ComboBox(LUForms,250,35,160,40);
         LUPanel.getPanel().add(LULabel.getLabel());
         LUPanel.getPanel().add(LUComboBox.getComboBox());
 
@@ -134,22 +134,6 @@ public class MainFrame extends JFrame {
         return methodComboBox.getItem();
     }
 
-    public String[] getInitialGuess() {
-        return initialGuessField.getField().getText().split(",");
-    }
-
-    public int getNoOfIterations() {
-        return Integer.parseInt(noOfIterationsField.getField().getText());
-    }
-
-    public double getAbsRelativeErrorField() {
-        return Double.parseDouble(absRelativeErrorField.getField().getText());
-    }
-
-    public int getPrecision() {
-        return Integer.parseInt(precisionTxtField.getField().getText());
-    }
-
     public void setTime(String time) {
         TimeField.getField().setText(time);
     }
@@ -168,6 +152,26 @@ public class MainFrame extends JFrame {
 
     public JButton getButton() {
         return calcButton.getButton();
+    }
+
+    public String[] getInitialGuess() {
+        String s = initialGuessField.getField().getText().equals("") ? "1,1,1" : initialGuessField.getField().getText();
+        return s.split(",");
+    }
+
+    public int getNoOfIterations() {
+        String s = noOfIterationsField.getField().getText().equals("") ? "20" : noOfIterationsField.getField().getText();
+        return Integer.parseInt(s);
+    }
+
+    public double getAbsRelativeErrorField() {
+        String s = absRelativeErrorField.getField().getText().equals("") ? "0.001" : absRelativeErrorField.getField().getText();
+        return Double.parseDouble(s);
+    }
+
+    public int getPrecision() {
+        String s = precisionTxtField.getField().getText().equals("") ? "5" : precisionTxtField.getField().getText();
+        return Integer.parseInt(s);
     }
 
     ActionListener buttonListener = new ActionListener() {
