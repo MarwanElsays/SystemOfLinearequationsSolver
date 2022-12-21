@@ -16,7 +16,7 @@ public class OutputFrame extends JFrame {
     OutputFrame() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Eliminations");
-        this.setSize(500, 500);
+        this.setSize(700, 700);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
 
@@ -29,9 +29,10 @@ public class OutputFrame extends JFrame {
 
         outputPane = new JScrollPane(OutputArea);
         outputPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        outputPane.setBounds(50, 50, 400, 400);
+        outputPane.setBounds(50, 50, 600, 600);
 
         this.add(outputPane);
+        OutputArea.setText("");
         this.setVisible(true);
     }
 
@@ -40,12 +41,18 @@ public class OutputFrame extends JFrame {
         for (int i = 0; i < result.length; i++) {
             output += "x" + (i + 1) + " = " + result[i] + "\n";
         }
-        OutputArea.setText(output);
+        OutputArea.append(output);
         OutputArea.setEditable(false);
     }
 
     public void printSteps(String s) {
-        OutputArea.setText(s);
+        OutputArea.append(s);
+        OutputArea.setEditable(false);
+    }
+
+    public void setText(String x){
+        OutputArea.setText(x);
         OutputArea.setEditable(false);
     }
 }
+

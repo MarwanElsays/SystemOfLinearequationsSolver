@@ -10,8 +10,15 @@ public class ComboBox {
 
     ComboBox(String[] methods) {
         comboBox = new JComboBox<String>(methods);
-        comboBox.setPreferredSize(new Dimension(110, 30));
+        comboBox.setPreferredSize(new Dimension(140, 40));
         comboBox.setSelectedItem(null);
+    }
+
+    ComboBox(String[] methods,int x,int y,int w,int h) {
+        comboBox = new JComboBox<String>(methods);
+        comboBox.setPreferredSize(new Dimension(140, 40));
+        comboBox.setSelectedItem(null);
+        comboBox.setBounds(x, y, w, h);
     }
 
     public JComboBox<String> getComboBox() {
@@ -25,26 +32,4 @@ public class ComboBox {
     public void addActionListener(ActionListener listener) {
         comboBox.addActionListener(listener);
     }
-
-    // @Override
-    // public void actionPerformed(ActionEvent e) {
-
-    //     if (e.getSource() == methodComboBox) {
-    //         method = methodComboBox.getSelectedItem().toString();
-
-    //         if (method.equals("LU Decomposition"))
-    //             LUPanel.setVisible(true);
-    //         else
-    //             LUPanel.setVisible(false);
-
-    //         if (method.equals("Gauss-Seidel") || method.equals("Jacobi-Iteration"))
-    //             IterativePanel.setVisible(true);
-    //         else
-    //             IterativePanel.setVisible(false);
-    //     }
-
-    //     if (e.getSource() == LUComboBox) {
-    //         LUmethod = LUComboBox.getSelectedItem().toString();
-    //     }
-    // }
 }

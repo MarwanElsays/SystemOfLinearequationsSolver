@@ -1,4 +1,5 @@
 package Functions;
+
 public interface Solve {
     long getTime();
     double[][] getA();
