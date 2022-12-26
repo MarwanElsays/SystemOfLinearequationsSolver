@@ -1,13 +1,12 @@
 package Gui;
 
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import java.awt.Component;
 import java.awt.Dimension;
 
-public class Panel {
+public class Panel{
 
     private JPanel panel;
     Panel[][] subPanels;
@@ -29,14 +28,11 @@ public class Panel {
         panel.setAlignmentY(JPanel.CENTER_ALIGNMENT);
     }
 
-    Panel(int rows, int columns, int vGap, int hGap, Color color) {
-        panel = new JPanel();
-        panel.setBackground(color);
-        panel.setLayout(new GridLayout(rows, columns, hGap, vGap));
-        subPanels = new Panel[rows][columns];
+    public void setlayoutNull(){
+        panel.setLayout(null);
     }
 
-    void addComponents(Component[] components) {
+    public void AddComponents(Component[] components) {
         for (Component component : components) {
             panel.add(component);
         }

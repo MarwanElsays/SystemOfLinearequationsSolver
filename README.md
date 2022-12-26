@@ -1,3 +1,3 @@
 # SystemOfLinearequationsSolver
 
-java app to Solve systems of linear of equations
+java Gui app to Solve systems of linear of equations
