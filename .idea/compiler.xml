@@ -9,5 +9,8 @@
         <module name="SystemOfLinearequationsSolver" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SystemOfLinearequationsSolver" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>
