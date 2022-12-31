@@ -9,6 +9,8 @@ import java.math.RoundingMode;
 public class FalsePosition {
     private final Expression expression;
     private final int precision;
+    private double result;
+    private long time;
 
     public FalsePosition(String function , int precision){
         expression = new ExpressionBuilder(function).variable("x").build();
@@ -20,6 +22,8 @@ public class FalsePosition {
             System.out.println("Unacceptable");
             return;
         }
+
+        long startTime = System.nanoTime();
         double xRootOld , xRootNew = 0, relativeError = Double.MAX_VALUE;
         boolean stop = false;
         int iteration = 0;
@@ -46,6 +50,16 @@ public class FalsePosition {
         }
         System.out.println(xRootNew);
         System.out.println("After" + iteration + "Iterations");
+        this.time = System.nanoTime() - startTime;
+        result = xRootNew;
+    }
+
+    public double getRoot(){
+        return result;
+    }
+
+    public String getTime(){
+        return String.valueOf(this.time);
     }
 
     private double f(double x) {
