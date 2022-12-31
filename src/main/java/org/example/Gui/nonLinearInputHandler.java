@@ -2,6 +2,7 @@ package org.example.Gui;
 
 import java.awt.Color;
 
+import org.example.Functions.NonLinear.FalsePosition;
 import org.example.Functions.NonLinear.Newton_Raphson;
 import org.example.Functions.NonLinear.fixedPointSolver;
 
@@ -39,12 +40,15 @@ public class nonLinearInputHandler {
                 break;
             }
             case "False-Position": {
-                frame.setTime(String.valueOf("2"));
+                FalsePosition falsePosition = new FalsePosition(Expression, precision);
+                falsePosition.solve(1, 3, noOfIterations, RelativeError);
+                frame.setTime(falsePosition.getTime());
+                outputframe.setText("the root = " + falsePosition.getRoot());
                 break;
             }
             case "Fixed point": {
                 fixedPointSolver fixedPoint = new fixedPointSolver(Expression,initialGuess,RelativeError,noOfIterations,precision);
-                frame.setTime(String.valueOf(fixedPoint.getTime()));
+                frame.setTime(fixedPoint.getTime());
                 outputframe.setText("the root = "+fixedPoint.getXr());
                 break;
             }

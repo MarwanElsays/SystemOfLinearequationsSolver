@@ -30,8 +30,8 @@ public class fixedPointSolver {
         return Xr;
     }
 
-    public double getTime() {
-        return time;
+    public String getTime() {
+        return String.valueOf(time);
     }
 
     public void Solve(){
