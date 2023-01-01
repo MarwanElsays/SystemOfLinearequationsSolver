@@ -222,6 +222,6 @@ public class LinearInputHandler {
     private void solveLU() {
         OutputFrame outputframe = new OutputFrame();
         int precision = frame.getPrecision();
-        LU lu = new LU(A,B,precision,frame.getLUForm(),outputframe,this.vars);
+        new LU(A,B,precision,frame.getLUForm(),outputframe,this.vars);
     }
 }

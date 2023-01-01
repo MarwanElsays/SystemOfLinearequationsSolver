@@ -151,7 +151,7 @@ public class nonLinearFrame extends JFrame {
     }
 
     public double getAbsRelativeErrorField() {
-        String s = absRelativeErrorField.getField().getText().equals("") ? "0.001" : absRelativeErrorField.getField().getText();
+        String s = absRelativeErrorField.getField().getText().equals("") ? "0.1" : absRelativeErrorField.getField().getText();
         return Double.parseDouble(s);
     }
 

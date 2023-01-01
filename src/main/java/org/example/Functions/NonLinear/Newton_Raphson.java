@@ -20,7 +20,7 @@ public class Newton_Raphson {
 
     public void solve(double initialGuess, double epsilon, int maxIterations) {
         time = System.nanoTime();
-        double relativeError = 1;
+        double relativeError = 100;
         int iterations = 0;
         double x = initialGuess;
         double xNew = 0;
@@ -29,12 +29,13 @@ public class Newton_Raphson {
             double df = getRoundedValue(df(x));
             xNew = getRoundedValue(x - f / df);
             if (xNew != 0)
-                relativeError = Math.abs((xNew - x) / xNew);
+                relativeError = Math.abs((xNew - x) / xNew)*100;
             iterations++;
             steps += "Iteration " + iterations + ": " + "Xi+1 = " + x + " - " + f + " / " + df + " = " + xNew + "\n";
             x = xNew;
         }
         steps+="The Root = " + xNew;
+        steps+="\nThe root is "+ checkValid(xNew, epsilon);
         System.out.println(checkValid(xNew, epsilon));
         System.out.println(steps);
         time = System.nanoTime() - time;
@@ -59,7 +60,7 @@ public class Newton_Raphson {
 
 
     private String checkValid(double xNew, double epsilon) {
-        if (Math.abs(f(xNew)) < epsilon)
+        if (Math.abs(f(xNew)) < epsilon/100)
             return "valid";
         return "non-valid";
     }

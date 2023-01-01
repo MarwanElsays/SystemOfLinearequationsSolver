@@ -47,9 +47,12 @@ public class nonLinearInputHandler {
                 break;
             }
             case "Fixed point": {
-                fixedPointSolver fixedPoint = new fixedPointSolver(Expression,initialGuess,RelativeError,noOfIterations,precision);
+                String[] exp = Expression.split("\n");
+                fixedPointSolver fixedPoint = new fixedPointSolver(exp,1,RelativeError,noOfIterations,precision);
                 frame.setTime(fixedPoint.getTime());
-                outputframe.setText("the root = "+fixedPoint.getXr());
+                outputframe.setText(fixedPoint.getSteps());
+                exp[0] = "x";
+                new GraphFrame(exp);
                 break;
             }
             case "Newton-Raphson": {
