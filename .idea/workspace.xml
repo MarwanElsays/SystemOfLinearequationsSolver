@@ -4,11 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="880565ce-53f3-4643-947a-67a62f95a8b0" name="Changes" comment="" />
+    <list default="true" id="880565ce-53f3-4643-947a-67a62f95a8b0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_objecthunter_exp4j_0_4_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SystemOfLinearequationsSolver.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Functions/NonLinear/Bisection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Functions/NonLinear/Bisection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Functions/NonLinear/FalsePosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Functions/NonLinear/FalsePosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Functions/NonLinear/FalsePosition.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/Functions/NonLinear/FalsePosition.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

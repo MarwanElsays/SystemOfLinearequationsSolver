@@ -20,6 +20,11 @@
             <artifactId>exp4j</artifactId>
             <version>0.4.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-el-api</artifactId>
+            <version>10.1.4</version>
+        </dependency>
     </dependencies>
 
 </project>
