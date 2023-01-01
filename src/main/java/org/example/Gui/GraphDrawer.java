@@ -29,6 +29,7 @@ public class GraphDrawer extends Canvas {
 
     @Override
     public void paint(Graphics g) {
+        System.out.println("hi");
         Graphics2D g2d = (Graphics2D) g;
         BasicStroke bs = new BasicStroke(4, BasicStroke.JOIN_ROUND, BasicStroke.JOIN_BEVEL);
         g2d.setStroke(bs);

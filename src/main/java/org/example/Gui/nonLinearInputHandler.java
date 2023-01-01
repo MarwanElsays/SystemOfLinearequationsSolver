@@ -51,6 +51,7 @@ public class nonLinearInputHandler {
                 fixedPointSolver fixedPoint = new fixedPointSolver(exp,1,RelativeError,noOfIterations,precision);
                 frame.setTime(fixedPoint.getTime());
                 outputframe.setText(fixedPoint.getSteps());
+                exp[0] = "x";
                 new GraphFrame(exp);
                 break;
             }
