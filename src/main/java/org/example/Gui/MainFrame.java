@@ -14,7 +14,7 @@ public class MainFrame implements ActionListener, MouseListener {
 
     MainFrame() {
 
-        imageicon = new ImageIcon("war1.jpg");
+        imageicon = new ImageIcon("linear.jpg");
 
         myButton.setBounds(300, 200, 210, 70);
         myButton.setFont(new Font("Helvetica", Font.BOLD, 20));
