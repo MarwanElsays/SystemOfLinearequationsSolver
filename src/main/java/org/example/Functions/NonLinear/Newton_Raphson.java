@@ -32,10 +32,11 @@ public class Newton_Raphson {
                 relativeError = Math.abs((xNew - x) / xNew)*100;
             iterations++;
             steps += "Iteration " + iterations + ": " + "Xi+1 = " + x + " - " + f + " / " + df + " = " + xNew + "\n";
+            steps += "error = " + getRoundedValue(relativeError) + "%\n\n";
             x = xNew;
         }
         steps+="The Root = " + xNew;
-        steps+="\nThe root is "+ checkValid(xNew, epsilon);
+        steps+="\nThe calculated root is "+ checkValid(xNew, epsilon);
         System.out.println(checkValid(xNew, epsilon));
         System.out.println(steps);
         time = System.nanoTime() - time;
@@ -62,7 +63,7 @@ public class Newton_Raphson {
     private String checkValid(double xNew, double epsilon) {
         if (Math.abs(f(xNew)) < epsilon/100)
             return "valid";
-        return "non-valid";
+        return "invalid";
     }
 
     private double getRoundedValue(double x){
