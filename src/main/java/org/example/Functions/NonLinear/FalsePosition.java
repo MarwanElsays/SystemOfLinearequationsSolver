@@ -84,6 +84,7 @@ public class FalsePosition {
         }else{
             stringBuilder.append("The approximate value of the root equals ").append(result).append(" with relative error equals ").append(relativeError).append("%");
         }
+        stringBuilder.append("the root = " + getRoot());
     }
 
     public double getRoot(){

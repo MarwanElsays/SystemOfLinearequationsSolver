@@ -39,15 +39,15 @@ public class nonLinearInputHandler {
         switch (frame.getMethod()) {
             case "Bisection": {
                 Bisection bisection = new Bisection(Expressions[0], precision, Double.parseDouble(initialGuess[0]), Double.parseDouble(initialGuess[1]), RelativeError);
-                outputframe.setText(String.valueOf(bisection.getRoot()));   //replace with steps
+                outputframe.setText(bisection.getSteps());   //replace with steps
                 frame.setTime(bisection.getTime());
                 break;
             }
             case "False-Position": {
                 FalsePosition falsePosition = new FalsePosition(Expressions[0], precision);
                 falsePosition.solve(Double.parseDouble(initialGuess[0]), Double.parseDouble(initialGuess[1]), noOfIterations, RelativeError);
+                outputframe.setText(falsePosition.getSteps());
                 frame.setTime(falsePosition.getTime());
-                outputframe.setText("the root = " + falsePosition.getRoot());
                 break;
             }
             case "Fixed point": {
