@@ -14,19 +14,19 @@ public class Bisection {
     private int maxIterations = 50, precision;
     StringBuilder stringBuilder = new StringBuilder();
 
-    public Bisection(String function, int precision, double xUpper, double xLower) {
+    // public Bisection(String function, int precision, double xUpper, double xLower) {
 
-        this.function = function;
-        this.precision = precision;
-        this.xUpper = getRoundedValue(xUpper);
-        this.xLower = getRoundedValue(xLower);
-        this.epsilonTolerance = 0.00001;
+    //     this.function = function;
+    //     this.precision = precision;
+    //     this.xUpper = getRoundedValue(xUpper);
+    //     this.xLower = getRoundedValue(xLower);
+    //     this.epsilonTolerance = 0.00001;
 
-        long startTime = System.nanoTime();
-        this.calcRoot();
-        this.time = System.nanoTime() - startTime;
+    //     long startTime = System.nanoTime();
+    //     this.calcRoot();
+    //     this.time = System.nanoTime() - startTime;
 
-    }
+    // }
 
     public Bisection(String function, int precision, double xUpper, double xLower, double relativeError) {
 
@@ -68,7 +68,7 @@ public class Bisection {
     }
 
     private void calcRoot(){
-        stringBuilder.append("Finding the root between ").append(xLower).append(" and ").append(xLower).append("\n\n");
+        stringBuilder.append("Finding the root between ").append(xLower).append(" and ").append(xUpper).append("\n\n");
         if (function(this.xLower) * function(this.xUpper) > 0){
             stringBuilder.append("Unacceptable Guess...\n" + "There is no root between ").append(xLower).append(" and ").append(xUpper).append("\n\n");
             return;

@@ -15,9 +15,9 @@ public class fixedPointSolver {
     private double Xr;
     private double time;
     private int significantfigures;
-    private String Steps ="";
+    private String Steps = "";
 
-    public fixedPointSolver(String[] exp,double initialguess, double eps, int noOfIter,int significantfigures) {
+    public fixedPointSolver(String[] exp, double initialguess, double eps, int noOfIter, int significantfigures) {
         this.fx = exp[0];
         this.gx = exp[1];
         this.initialguess = initialguess;
@@ -41,29 +41,31 @@ public class fixedPointSolver {
         return Steps;
     }
 
-    public void Solve(){
+    public void Solve() {
         int iteration = 0;
         double relError = 100;
         double xOld = initialguess;
         double xr;
 
-        do{
-            xr = eval(xOld,gx);
+        do {
+            xr = eval(xOld, gx);
             iteration++;
-            Steps+="Iteration: "+iteration+"\nXi+1 = "+ gx.replaceAll("x", String.valueOf(xOld)) +" = "+xr+"\n";
-            if(xr != 0)relError = relativeError(xOld,xr); 
-            Steps+="εa% = |("+xr+" - "+xOld+")/"+xr+"|"+" *100% = "+relError+"%\n";
-            Steps+="-------------------------------------------------------------\n";
+            Steps += "Iteration: " + iteration + "\nXi+1 = " + gx.replaceAll("x", String.valueOf(xOld)) + " = " + xr
+                    + "\n";
+            if (xr != 0)
+                relError = relativeError(xOld, xr);
+            Steps += "εa% = |(" + xr + " - " + xOld + ")/" + xr + "|" + " *100% = " + relError + "%\n";
+            Steps += "-------------------------------------------------------------\n";
             xOld = xr;
-            
-        }while(iteration < noOfIter && relError > eps);
 
-        Steps+="The root = "+ xr;
-        Steps+="\nThe root is "+ Validate(xr);
+        } while (iteration < noOfIter && relError > eps && relError <= 100);
+
+        Steps += "The root = " + xr;
+        Steps += "\nThe root is " + Validate(xr);
         this.Xr = xr;
     }
 
-    public double eval(double x,String expression){
+    public double eval(double x, String expression) {
         Expression e = new ExpressionBuilder(expression)
                 .variables("x")
                 .build()
@@ -73,16 +75,17 @@ public class fixedPointSolver {
         return getRoundedValue(result);
     }
 
-    public String Validate(double xr){
-        if(Math.abs(eval(xr,fx)) < eps/100)return "Valid";
-        return "Non-Valid";
+    public String Validate(double xr) {
+        if (Math.abs(eval(xr, fx)) < eps / 100)
+            return "valid";
+        return "invalid";
     }
 
-    public double relativeError(double xOld,double xr){
-        return (Math.abs((xr-xOld)/xr))*100;
+    public double relativeError(double xOld, double xr) {
+        return (Math.abs((xr - xOld) / xr)) * 100;
     }
 
-    private double getRoundedValue(double x){
-        return BigDecimal.valueOf(x).setScale(significantfigures , RoundingMode.HALF_UP).doubleValue();
+    private double getRoundedValue(double x) {
+        return BigDecimal.valueOf(x).setScale(significantfigures, RoundingMode.HALF_UP).doubleValue();
     }
 }

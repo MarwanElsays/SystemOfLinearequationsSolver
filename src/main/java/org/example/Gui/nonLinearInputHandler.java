@@ -23,7 +23,7 @@ public class nonLinearInputHandler {
         precision = frame.getPrecision();
         RelativeError = frame.getAbsRelativeErrorField();
         noOfIterations = frame.getNoOfIterations();
-        initialGuess = frame.getInitialGuess().split("\n");
+        initialGuess = frame.getInitialGuess().split(",");
     }
 
     public void ChangeColor(Color c) {
@@ -65,7 +65,7 @@ public class nonLinearInputHandler {
                 break;
             }
             case "Secant Method": {
-                SecantSolver secant = new SecantSolver();
+                SecantSolver secant = new SecantSolver(precision);
                 secant.solve(Expressions[0], Double.parseDouble(initialGuess[0]), Double.parseDouble(initialGuess[1]), RelativeError, noOfIterations);
                 outputframe.setText(secant.getSteps());
                 frame.setTime(secant.getTime());
