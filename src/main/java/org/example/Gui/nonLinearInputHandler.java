@@ -10,7 +10,7 @@ public class nonLinearInputHandler {
 
     private nonLinearFrame frame;
     private String Expression;
-    private double initialGuess; 
+    private double initialGuess;
     private int precision;
     private double RelativeError;
     private int noOfIterations;

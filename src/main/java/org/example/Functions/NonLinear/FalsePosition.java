@@ -102,8 +102,7 @@ public class FalsePosition {
         return BigDecimal.valueOf(x).setScale(precision , RoundingMode.HALF_UP).doubleValue();
     }
 
-    @Override
-    public String toString(){
+    public String getSteps(){
         return stringBuilder.toString();
     }
 }

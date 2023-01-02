@@ -126,4 +126,6 @@ public class Bisection {
 
     public long getTime(){return this.time;}
 
+    public String getSteps(){return stringBuilder.toString();}
+
 }
