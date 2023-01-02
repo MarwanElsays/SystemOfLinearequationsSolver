@@ -1,20 +1,28 @@
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\GaussElimination.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\JacobiSolver.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\Button.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\MainFrame.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\InputHandler.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\Main.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\NonLinear\FalsePosition.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\Label.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\TextArea.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\TextField.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\Events.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\GaussJordan.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\MatrixConfigurator.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\Panel.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\OutputFrame.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\Solve.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\NonLinear\Bisection.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\LU.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\GaussSeidalSolver.java
-C:\Users\MARWAN\Desktop\New folder\FromGroup\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\ComboBox.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\ComboBox.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\nonLinearInputHandler.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\OutputFrame.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\Linear\GaussElimination.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\nonLinearFrame.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\Linear\LU.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\MainFrame.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\Linear\GaussSeidalSolver.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\Button.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\TextArea.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\Events.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\TextField.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\Linear\GaussJordan.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\Panel.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\NonLinear\FalsePosition.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\LinearInputHandler.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\Linear\MatrixConfigurator.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\NonLinear\fixedPointSolver.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\GraphDrawer.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\Main.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\NonLinear\Bisection.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\GraphFrame.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\LinearFrame.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\Linear\Solve.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\Linear\JacobiSolver.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Gui\Label.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\NonLinear\Newton_Raphson.java
+C:\Users\MARWAN\Desktop\Computer Engineering Year 2\1st Semester\Numerical\Projects\Phase1&2\SystemOfLinearequationsSolver\src\main\java\org\example\Functions\NonLinear\SecantSolver.java

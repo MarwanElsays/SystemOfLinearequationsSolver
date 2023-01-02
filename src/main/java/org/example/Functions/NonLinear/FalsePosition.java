@@ -1,5 +1,6 @@
 package org.example.Functions.NonLinear;
 
+
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
@@ -34,7 +35,7 @@ public class FalsePosition {
         // Or we will iterate until we reach the maximum number of iterations
         double xRootOld , xRootNew = 0, relativeError = Double.MAX_VALUE;
         int iteration = 0;
-        boolean stop = false;
+        boolean stop = false, flag = false;
         while (!stop && iteration < maxIterations){
             iteration++;
             stringBuilder.append("Iteration #").append(iteration).append("\n\n").append("Calculating the new value of xRoot");
@@ -57,7 +58,8 @@ public class FalsePosition {
             }
             if (f(xRootNew) == 0){
                 // We finally reach the root, so there is no need to iterate more
-                stringBuilder.append("We found the exact root between ").append(xLower).append(" and ").append(xLower).append("\n\n");
+                stringBuilder.append("We found the exact root between ").append(xLower).append(" and ").append(xUpper).append("\n\n");
+                flag = true;
                 break;
             }else if(f(xRootNew) * f(xLower) < 0){
                 // The root is between xLower and xRootNew
@@ -74,11 +76,15 @@ public class FalsePosition {
         }
         this.time = System.nanoTime() - startTime;
         result = xRootNew;
-        if (iteration == maxIterations){
+        if(flag){
+            stringBuilder.append("We found the exact root : ").append(xRootNew).append("\n\n");
+        }
+        else if (iteration == maxIterations){
             stringBuilder.append("We have reached the maximum of iterations, so the approximate value of the root equals ").append(result).append(" with relative error equals").append(relativeError).append("%");
         }else{
             stringBuilder.append("The approximate value of the root equals ").append(result).append(" with relative error equals ").append(relativeError).append("%");
         }
+        stringBuilder.append("the root = " + getRoot());
     }
 
     public double getRoot(){
@@ -97,8 +103,7 @@ public class FalsePosition {
         return BigDecimal.valueOf(x).setScale(precision , RoundingMode.HALF_UP).doubleValue();
     }
 
-    @Override
-    public String toString(){
+    public String getSteps(){
         return stringBuilder.toString();
     }
 }
