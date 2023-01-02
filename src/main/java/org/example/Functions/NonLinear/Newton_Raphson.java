@@ -36,9 +36,7 @@ public class Newton_Raphson {
             x = xNew;
         }
         steps+="The Root = " + xNew;
-        steps+="\nThe calculated root is "+ checkValid(xNew, epsilon);
-        System.out.println(checkValid(xNew, epsilon));
-        System.out.println(steps);
+        steps+="\nThe calculated root is "+ checkValid(xNew);
         time = System.nanoTime() - time;
     }
 
@@ -60,8 +58,8 @@ public class Newton_Raphson {
     }
 
 
-    private String checkValid(double xNew, double epsilon) {
-        if (Math.abs(f(xNew)) < epsilon/100)
+    private String checkValid(double xNew) {
+        if (Math.abs(f(xNew)) < 0.01)
             return "valid";
         return "invalid";
     }

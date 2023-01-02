@@ -76,7 +76,7 @@ public class fixedPointSolver {
     }
 
     public String Validate(double xr) {
-        if (Math.abs(eval(xr, fx)) < eps / 100)
+        if (Math.abs(eval(xr, fx)) < 0.01)
             return "valid";
         return "invalid";
     }
