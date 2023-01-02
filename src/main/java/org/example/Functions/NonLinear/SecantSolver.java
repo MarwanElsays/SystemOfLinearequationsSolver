@@ -73,7 +73,7 @@ public class SecantSolver {
         time = System.nanoTime() - time;
         return newPoint;
     }
-
+    
     private double getRoundedValue(double value){
         return BigDecimal.valueOf(value).setScale(this.precision , RoundingMode.HALF_UP).doubleValue();
     }
