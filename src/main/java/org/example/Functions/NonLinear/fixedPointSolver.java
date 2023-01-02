@@ -58,7 +58,7 @@ public class fixedPointSolver {
             Steps += "-------------------------------------------------------------\n";
             xOld = xr;
 
-        } while (iteration < noOfIter && relError > eps && relError <= 100);
+        } while (iteration < noOfIter && relError > eps && Math.abs(xr - initialguess) < 100);
 
         Steps += "The root = " + xr;
         Steps += "\nThe root is " + Validate(xr);
