@@ -50,7 +50,7 @@ public class fixedPointSolver {
         do {
             xr = eval(xOld, gx);
             iteration++;
-            Steps += "Iteration: " + iteration + "\nXi+1 = " + gx.replaceAll("x", String.valueOf(xOld)) + " = " + xr
+            Steps += "Iteration: " + iteration + "\nXi+1 = " + gx.replaceAll("x", "(" + String.valueOf(xOld)) + ")" + " = " + xr
                     + "\n";
             if (xr != 0)
                 relError = relativeError(xOld, xr);
