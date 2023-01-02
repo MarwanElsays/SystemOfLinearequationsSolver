@@ -146,12 +146,12 @@ public class nonLinearFrame extends JFrame {
     }
 
     public int getNoOfIterations() {
-        String s = noOfIterationsField.getField().getText().equals("") ? "20" : noOfIterationsField.getField().getText();
+        String s = noOfIterationsField.getField().getText().equals("") ? "50" : noOfIterationsField.getField().getText();
         return Integer.parseInt(s);
     }
 
     public double getAbsRelativeErrorField() {
-        String s = absRelativeErrorField.getField().getText().equals("") ? "0.1" : absRelativeErrorField.getField().getText();
+        String s = absRelativeErrorField.getField().getText().equals("") ? "0.00001" : absRelativeErrorField.getField().getText();
         return Double.parseDouble(s);
     }
 
