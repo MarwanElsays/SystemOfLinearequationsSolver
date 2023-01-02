@@ -2,70 +2,76 @@ package org.example.Gui;
 
 import java.awt.Color;
 
+import org.example.Functions.NonLinear.Bisection;
 import org.example.Functions.NonLinear.FalsePosition;
 import org.example.Functions.NonLinear.Newton_Raphson;
+import org.example.Functions.NonLinear.SecantSolver;
 import org.example.Functions.NonLinear.fixedPointSolver;
 
 public class nonLinearInputHandler {
 
     private nonLinearFrame frame;
-    private String Expression;
-    private double initialGuess;
+    private String[] Expressions;
+    private String[] initialGuess;
     private int precision;
     private double RelativeError;
     private int noOfIterations;
 
     nonLinearInputHandler(nonLinearFrame frame) {
         this.frame = frame;
-        this.Expression = frame.getEquations();
-        this.precision = frame.getPrecision();
-        this.RelativeError = frame.getAbsRelativeErrorField();
-        this.noOfIterations = frame.getNoOfIterations();
-        
+        Expressions = frame.getEquations().split("\n");
+        precision = frame.getPrecision();
+        RelativeError = frame.getAbsRelativeErrorField();
+        noOfIterations = frame.getNoOfIterations();
+        initialGuess = frame.getInitialGuess().split("\n");
     }
 
-    public void ChangeColor(Color c){
+    public void ChangeColor(Color c) {
         frame.getButton().setBackground(c);
     }
 
     public void setMethod() {
         frame.getIterativePanel().setVisible(true);
     }
-    
+
     public void solve() {
         OutputFrame outputframe = new OutputFrame();
         switch (frame.getMethod()) {
             case "Bisection": {
-                frame.setTime(String.valueOf("1"));
+                Bisection bisection = new Bisection(Expressions[0], precision, Double.parseDouble(initialGuess[0]), Double.parseDouble(initialGuess[1]), RelativeError);
+                outputframe.setText(String.valueOf(bisection.getRoot()));   //replace with steps
+                frame.setTime(bisection.getTime());
                 break;
             }
             case "False-Position": {
-                FalsePosition falsePosition = new FalsePosition(Expression, precision);
-                falsePosition.solve(1, 3, noOfIterations, RelativeError);
+                FalsePosition falsePosition = new FalsePosition(Expressions[0], precision);
+                falsePosition.solve(Double.parseDouble(initialGuess[0]), Double.parseDouble(initialGuess[1]), noOfIterations, RelativeError);
                 frame.setTime(falsePosition.getTime());
                 outputframe.setText("the root = " + falsePosition.getRoot());
                 break;
             }
             case "Fixed point": {
-                String[] exp = Expression.split("\n");
-                fixedPointSolver fixedPoint = new fixedPointSolver(exp,1,RelativeError,noOfIterations,precision);
-                frame.setTime(fixedPoint.getTime());
+                fixedPointSolver fixedPoint = new fixedPointSolver(Expressions, Double.parseDouble(initialGuess[0]), RelativeError, noOfIterations, precision);
                 outputframe.setText(fixedPoint.getSteps());
-                exp[0] = "x";
-                new GraphFrame(exp);
+                frame.setTime(fixedPoint.getTime());
+                Expressions[0] = "x";
                 break;
             }
             case "Newton-Raphson": {
-                Newton_Raphson newtonRaphson = new Newton_Raphson(Expression,precision);
-                newtonRaphson.solve(1, RelativeError, noOfIterations);
-                frame.setTime(newtonRaphson.getTime());
+                Newton_Raphson newtonRaphson = new Newton_Raphson(Expressions[0], precision);
+                newtonRaphson.solve(Double.parseDouble(initialGuess[0]), RelativeError, noOfIterations);
                 outputframe.setText(newtonRaphson.getSteps());
+                frame.setTime(newtonRaphson.getTime());
                 break;
             }
             case "Secant Method": {
-                frame.setTime(String.valueOf("5"));
+                SecantSolver secant = new SecantSolver();
+                secant.solve(Expressions[0], Double.parseDouble(initialGuess[0]), Double.parseDouble(initialGuess[1]), RelativeError, noOfIterations);
+                outputframe.setText(secant.getSteps());
+                frame.setTime(secant.getTime());
                 break;
             }
         }
-    } 
+        new GraphFrame(Expressions);
+    }
 }

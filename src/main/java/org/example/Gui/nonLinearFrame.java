@@ -140,9 +140,9 @@ public class nonLinearFrame extends JFrame {
         return calcButton.getButton();
     }
 
-    public double getInitialGuess() {
-        String s = initialGuessField.getField().getText().equals("") ? "1" : initialGuessField.getField().getText();
-        return Double.parseDouble(s);
+    public String getInitialGuess() {
+        String s = initialGuessField.getField().getText().equals("") ? "-1,1" : initialGuessField.getField().getText();
+        return s;
     }
 
     public int getNoOfIterations() {
