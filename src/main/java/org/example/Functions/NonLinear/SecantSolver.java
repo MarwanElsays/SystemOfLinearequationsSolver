@@ -9,6 +9,7 @@ public class SecantSolver {
 
     private Expression ex;
     private String Steps = "";
+    private long time = 0;
   
 
     public SecantSolver(){}
@@ -43,7 +44,7 @@ public class SecantSolver {
     public double solve(String function, double firstPoint, double secondPoint, double absoluteRelativeError, int maxIteration){
         //at the start of the method the expression is parsed to make the method eval ready for operation
         this.expressionParser(function);
-
+        time = System.nanoTime();
         Steps+="Xi+1 = Xi - ( " + function.replaceAll("x", "(Xi)") + " ) * ( Xi-1 - Xi )) / (( " + function.replaceAll("x", "(Xi-1)") +" ) - " + function.replaceAll("x", "(Xi)") + " ))";
 
         //if absolute relative error was somehow given negative then it is set to its absolute value
@@ -68,10 +69,15 @@ public class SecantSolver {
             //Xi = Xi+1
             firstPoint = newPoint;
         }
+        time = System.nanoTime() - time;
         return newPoint;
     }
 
     public String getSteps() {
         return Steps;
+    }
+
+    public String getTime() {
+        return String.valueOf(time);
     }
 }

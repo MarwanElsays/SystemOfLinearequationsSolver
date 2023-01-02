@@ -13,27 +13,13 @@ public class Bisection {
     private double xUpper, xLower, xRoot, fUpper, fLower, fRoot, epsilonTolerance, relativeError;
     private int maxIterations = 50, precision;
 
-    public Bisection(String function, int precision, double xUpper, double xLower) {
+    public Bisection(String function, int precision, double xUpper, double xLower, double relativeError) {
 
         this.function = function;
         this.precision = precision;
         this.xUpper = getRoundedValue(xUpper);
         this.xLower = getRoundedValue(xLower);
-        this.epsilonTolerance = 0.00001;
-
-        long startTime = System.nanoTime();
-        this.calcRoot();
-        this.time = System.nanoTime() - startTime;
-
-    }
-
-    public Bisection(String function, int precision, double xUpper, double xLower, int SFs) {
-
-        this.function = function;
-        this.precision = precision;
-        this.xUpper = getRoundedValue(xUpper);
-        this.xLower = getRoundedValue(xLower);
-        this.epsilonTolerance = getRoundedValue(0.5 * Math.pow(10, (2-SFs)));
+        this.epsilonTolerance = relativeError;
 
         long startTime = System.nanoTime();
         this.calcRoot();
@@ -99,6 +85,6 @@ public class Bisection {
 
     public double getRoot(){return this.xRoot;}
 
-    public long getTime(){return this.time;}
+    public String getTime(){return String.valueOf(time);}
 
 }
