@@ -1,7 +1,6 @@
 package org.example.Functions.NonLinear;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.security.spec.ECField;
 
 import org.example.Gui.OutputFrame;
 import net.objecthunter.exp4j.Expression;
